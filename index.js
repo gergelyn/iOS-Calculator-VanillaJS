@@ -36,7 +36,7 @@ let eight = document.getElementById("8");
 
 let nine = document.getElementById("9");
 
-let activeElements = document.getElementsByClassName("active");
+let comma = document.getElementById("comma");
 
 let finalNumber = 0;
 
@@ -280,6 +280,22 @@ function subtractFunction() {
   addFunction();
 }*/
 
+comma.addEventListener("click", function() {
+  commaFunction();
+});
+
+function commaFunction() {
+  if (secondDigits.length != 0) {
+    secondDigits.push(".");
+    secondNumber = secondDigits.join("");
+    input.innerHTML = secondNumber;
+  } else {
+    digits.push(".");
+    number = digits.join("");
+    input.innerHTML = number;
+  }
+}
+
 percentage.addEventListener("click", function() {
   percentageFunction();
   console.log("number " + number);
@@ -317,3 +333,5 @@ function percentageFunction() {
     input.innerHTML = "Error";
   }
 } */
+
+/* Boring Stuffs */
