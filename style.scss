@@ -1,0 +1,76 @@
+/* Variables */
+$orange: #ffa000;
+$grey: #a5a5a5;
+$dark-grey: #333333;
+$black: #000;
+$orange-hover: #fbc88d;
+$dark-grey-hover: #737373;
+$grey-hover: #d8d9da;
+
+body {
+  background: white;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  font-size: 36px;
+  margin-left: 25px;
+}
+
+.calculator {
+  background: $black;
+  display: grid;
+  height: 667px;
+  width: 365px;
+  grid-template-columns: repeat(4, 75px);
+  grid-gap: 14px;
+  justify-content: center;
+  align-content: center;
+}
+
+.grid-item {
+  width: 75px;
+  height: 75px;
+  background: $dark-grey;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 75px;
+  cursor: pointer;
+}
+
+.grid-item:hover {
+  background: $dark-grey-hover;
+}
+
+.light {
+  background: $grey;
+  color: $black;
+}
+
+.light:hover {
+  background: $grey-hover;
+}
+
+.input {
+  grid-column: 1 / 5;
+  text-align: right;
+  font-size: 90px;
+}
+
+.zero {
+  grid-column: 1 / 3;
+  width: 164px;
+  border-radius: 37.5px;
+  text-align: center;
+}
+
+.operator {
+  background: $orange;
+}
+
+.operator:hover {
+  background: $orange-hover;
+}
+
+.active {
+  background: #ffffff;
+  color: $orange;
+}
