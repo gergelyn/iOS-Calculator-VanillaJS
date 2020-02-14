@@ -99,19 +99,24 @@ nine.addEventListener("click", function() {
 });
 
 function numClicked(num) {
-  if (add.classList.contains("operation")) {
+  if (
+    add.classList.contains("operation") ||
+    multiple.classList.contains("operation")
+  ) {
     removeActive();
     secondDigits.push(num);
     secondNumber = secondDigits.join("");
     secondNumber = parseInt(secondNumber);
     ac.innerHTML = "C";
     input.innerHTML = secondNumber;
+    console.log("secondNumber = " + secondNumber);
   } else {
     digits.push(num);
     number = digits.join("");
     number = parseInt(number);
     ac.innerHTML = "C";
     input.innerHTML = number;
+    console.log("number = " + number);
   }
 }
 
@@ -123,6 +128,9 @@ function clearVars() {
   finalNumber = 0;
   input.innerHTML = number;
   ac.innerHTML = "AC";
+  console.log("number = " + number);
+  console.log("secondNumber = " + secondNumber);
+  console.log("finalNumber = " + finalNumber);
 }
 
 ac.addEventListener("click", function() {
@@ -132,21 +140,35 @@ ac.addEventListener("click", function() {
 
 function removeActive() {
   add.classList.remove("active"); // Remove .active styling attribute
+  multiple.classList.remove("active"); // Remove .active styling attribute
 }
 
 function removeOperation() {
   add.classList.remove("operation"); // Remove .operation functionate attribute
+  multiple.classList.remove("operation"); // Remove .operation functionate attribute
 }
 
 result.addEventListener("click", function() {
   if (secondDigits.length == 0) {
     input.innerHTML = number;
+    console.log(number);
   } else if (add.classList.contains("operation")) {
     removeOperation();
     addFunction();
     number = finalNumber;
+    input.innerHTML = finalNumber;
     secondDigits.length = 0;
     secondNumber = 0;
+  } else if (multiple.classList.contains("operation")) {
+    removeOperation();
+    multipleFunction();
+    number = finalNumber;
+    input.innerHTML = finalNumber;
+    secondDigits.length = 0;
+    secondNumber = 0;
+    console.log("number = " + number);
+    console.log("finalNumber = " + finalNumber);
+    console.log("secondNumber = " + secondNumber);
   } else {
     input.innerHTML = "Error";
   }
@@ -155,7 +177,12 @@ result.addEventListener("click", function() {
 add.addEventListener("click", function() {
   add.classList.add("active");
   add.classList.add("operation");
-  if (secondDigits.length != 0) {
+  if (secondNumber != 0) {
+    addFunction();
+    number = finalNumber;
+    console.log("number = " + number);
+    console.log("secondNumber = " + secondNumber);
+    console.log("finalNumber = " + finalNumber);
     secondDigits.length = 0;
     secondNumber = 0;
   }
@@ -166,17 +193,39 @@ function addFunction() {
   input.innerHTML = finalNumber;
 }
 
+multiple.addEventListener("click", function() {
+  multiple.classList.add("active");
+  multiple.classList.add("operation");
+  if (secondNumber != 0) {
+    multipleFunction();
+    number = finalNumber;
+    console.log("number = " + number);
+    console.log("secondNumber = " + secondNumber);
+    console.log("finalNumber = " + finalNumber);
+    secondDigits.length = 0;
+    secondNumber = 0;
+  }
+});
+
+function multipleFunction() {
+  finalNumber = number * secondNumber;
+  input.innerHTML = finalNumber;
+}
+
 /*if(digits.length != 0 && secondDigits.length != 0) {
   addFunction();
 }*/
 
 percentage.addEventListener("click", function() {
   percentageFunction();
+  console.log("number " + number);
+  console.log("finalNumber = " + finalNumber);
   input.innerHTML = finalNumber;
 });
 
 function percentageFunction() {
-  finalNumber = number / 100;
+  number = number / 100;
+  finalNumber = number;
 }
 
 /* function removeActive() {

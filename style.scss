@@ -7,12 +7,15 @@ $orange-hover: #fbc88d;
 $dark-grey-hover: #737373;
 $grey-hover: #d8d9da;
 
+* {
+  margin: 0;
+}
+
 body {
   background: white;
   color: #fff;
   font-family: "Roboto", sans-serif;
   font-size: 36px;
-  margin-left: 25px;
 }
 
 .calculator {
@@ -24,6 +27,8 @@ body {
   grid-gap: 14px;
   justify-content: center;
   align-content: center;
+  margin-left: 50%;
+  margin-top: 5%;
 }
 
 .grid-item {
