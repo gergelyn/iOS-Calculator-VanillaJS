@@ -101,7 +101,9 @@ nine.addEventListener("click", function() {
 function numClicked(num) {
   if (
     add.classList.contains("operation") ||
-    multiple.classList.contains("operation")
+    multiple.classList.contains("operation") ||
+    divide.classList.contains("operation") ||
+    subtract.classList.contains("operation")
   ) {
     removeActive();
     secondDigits.push(num);
@@ -141,11 +143,15 @@ ac.addEventListener("click", function() {
 function removeActive() {
   add.classList.remove("active"); // Remove .active styling attribute
   multiple.classList.remove("active"); // Remove .active styling attribute
+  divide.classList.remove("active");
+  subtract.classList.remove("active");
 }
 
 function removeOperation() {
   add.classList.remove("operation"); // Remove .operation functionate attribute
   multiple.classList.remove("operation"); // Remove .operation functionate attribute
+  divide.classList.remove("operation");
+  subtract.classList.remove("operation");
 }
 
 result.addEventListener("click", function() {
@@ -162,6 +168,26 @@ result.addEventListener("click", function() {
   } else if (multiple.classList.contains("operation")) {
     removeOperation();
     multipleFunction();
+    number = finalNumber;
+    input.innerHTML = finalNumber;
+    secondDigits.length = 0;
+    secondNumber = 0;
+    console.log("number = " + number);
+    console.log("finalNumber = " + finalNumber);
+    console.log("secondNumber = " + secondNumber);
+  } else if (divide.classList.contains("operation")) {
+    removeOperation();
+    divideFunction();
+    number = finalNumber;
+    input.innerHTML = finalNumber;
+    secondDigits.length = 0;
+    secondNumber = 0;
+    console.log("number = " + number);
+    console.log("finalNumber = " + finalNumber);
+    console.log("secondNumber = " + secondNumber);
+  } else if (subtract.classList.contains("operation")) {
+    removeOperation();
+    subtractFunction();
     number = finalNumber;
     input.innerHTML = finalNumber;
     secondDigits.length = 0;
@@ -209,6 +235,44 @@ multiple.addEventListener("click", function() {
 
 function multipleFunction() {
   finalNumber = number * secondNumber;
+  input.innerHTML = finalNumber;
+}
+
+divide.addEventListener("click", function() {
+  divide.classList.add("active");
+  divide.classList.add("operation");
+  if (secondNumber != 0) {
+    divideFunction();
+    number = finalNumber;
+    console.log("number = " + number);
+    console.log("finalNumber = " + finalNumber);
+    console.log("secondNumber = " + secondNumber);
+    secondDigits.length = 0;
+    secondNumber = 0;
+  }
+});
+
+function divideFunction() {
+  finalNumber = number / secondNumber;
+  input.innerHTML = finalNumber;
+}
+
+subtract.addEventListener("click", function() {
+  subtract.classList.add("active");
+  subtract.classList.add("operation");
+  if (secondNumber != 0) {
+    subtractFunction();
+    number = finalNumber;
+    console.log("number = " + number);
+    console.log("finalNumber = " + finalNumber);
+    console.log("secondNumber = " + secondNumber);
+    secondDigits.length = 0;
+    secondNumber = 0;
+  }
+});
+
+function subtractFunction() {
+  finalNumber = number - secondNumber;
   input.innerHTML = finalNumber;
 }
 
