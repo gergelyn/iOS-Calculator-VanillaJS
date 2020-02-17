@@ -334,4 +334,9 @@ function percentageFunction() {
   }
 } */
 
-/* Boring Stuffs */
+/* Bugs 
+
+1. If I hit 3 -> + -> 6 -> - it will be -3, instead of 9
+2. Comma is not working properly
+
+*/

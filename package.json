@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/gergelyn/iOS-Calculator-VanillaJS#readme",
   "devDependencies": {
+    "jest": "^25.1.0",
     "live-server": "^1.2.1",
     "sass": "^1.25.0"
   }
