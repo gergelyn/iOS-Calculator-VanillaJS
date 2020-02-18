@@ -48,13 +48,13 @@ let secondNumber = 0;
 
 zero.addEventListener("click", function() {
   if (add.classList.contains("operation")) {
-    if (secondNumber == 0) {
+    if (secondNumber.length == 0) {
       input.innerHTML = secondNumber;
     } else {
       numClicked(0);
     }
   } else {
-    if (number == 0) {
+    if (number.length == 0) {
       input.innerHTML = number;
     } else {
       numClicked(0);
@@ -106,19 +106,37 @@ function numClicked(num) {
     subtract.classList.contains("operation")
   ) {
     removeActive();
-    secondDigits.push(num);
-    secondNumber = secondDigits.join("");
-    secondNumber = parseInt(secondNumber);
-    ac.innerHTML = "C";
-    input.innerHTML = secondNumber;
-    console.log("secondNumber = " + secondNumber);
+    if (secondDigits.includes(".")) {
+      secondDigits.push(num);
+      secondNumber = secondDigits.join("");
+      input.innerHTML = secondNumber;
+      ac.innerHTML = "C";
+      secondNumber = parseFloat(secondNumber);
+      console.log("secondNumber = " + secondNumber);
+    } else {
+      secondDigits.push(num);
+      secondNumber = secondDigits.join("");
+      ac.innerHTML = "C";
+      input.innerHTML = secondNumber;
+      secondNumber = parseInt(secondNumber);
+      console.log("secondNumber = " + secondNumber);
+    }
   } else {
-    digits.push(num);
-    number = digits.join("");
-    number = parseInt(number);
-    ac.innerHTML = "C";
-    input.innerHTML = number;
-    console.log("number = " + number);
+    if (digits.includes(".")) {
+      digits.push(num);
+      number = digits.join("");
+      input.innerHTML = number;
+      ac.innerHTML = "C";
+      number = parseFloat(number);
+      console.log("number = " + number);
+    } else {
+      digits.push(num);
+      number = digits.join("");
+      ac.innerHTML = "C";
+      input.innerHTML = number;
+      number = parseInt(number);
+      console.log("number = " + number);
+    }
   }
 }
 
@@ -136,6 +154,7 @@ function clearVars() {
 }
 
 ac.addEventListener("click", function() {
+  removeOperation();
   removeActive();
   clearVars();
 });
@@ -143,15 +162,15 @@ ac.addEventListener("click", function() {
 function removeActive() {
   add.classList.remove("active"); // Remove .active styling attribute
   multiple.classList.remove("active"); // Remove .active styling attribute
-  divide.classList.remove("active");
-  subtract.classList.remove("active");
+  divide.classList.remove("active"); // Remove .active styling attribute
+  subtract.classList.remove("active"); // Remove .active styling
 }
 
 function removeOperation() {
   add.classList.remove("operation"); // Remove .operation functionate attribute
   multiple.classList.remove("operation"); // Remove .operation functionate attribute
-  divide.classList.remove("operation");
-  subtract.classList.remove("operation");
+  divide.classList.remove("operation"); // Remove .operation functionate attribute
+  subtract.classList.remove("operation"); // Remove .operation functionate attribute
 }
 
 result.addEventListener("click", function() {
@@ -165,6 +184,9 @@ result.addEventListener("click", function() {
     input.innerHTML = finalNumber;
     secondDigits.length = 0;
     secondNumber = 0;
+    console.log("number = " + number);
+    console.log("secondNumber = " + secondNumber);
+    console.log("finalNumber = " + finalNumber);
   } else if (multiple.classList.contains("operation")) {
     removeOperation();
     multipleFunction();
@@ -173,8 +195,8 @@ result.addEventListener("click", function() {
     secondDigits.length = 0;
     secondNumber = 0;
     console.log("number = " + number);
-    console.log("finalNumber = " + finalNumber);
     console.log("secondNumber = " + secondNumber);
+    console.log("finalNumber = " + finalNumber);
   } else if (divide.classList.contains("operation")) {
     removeOperation();
     divideFunction();
@@ -183,8 +205,8 @@ result.addEventListener("click", function() {
     secondDigits.length = 0;
     secondNumber = 0;
     console.log("number = " + number);
-    console.log("finalNumber = " + finalNumber);
     console.log("secondNumber = " + secondNumber);
+    console.log("finalNumber = " + finalNumber);
   } else if (subtract.classList.contains("operation")) {
     removeOperation();
     subtractFunction();
@@ -193,14 +215,16 @@ result.addEventListener("click", function() {
     secondDigits.length = 0;
     secondNumber = 0;
     console.log("number = " + number);
-    console.log("finalNumber = " + finalNumber);
     console.log("secondNumber = " + secondNumber);
+    console.log("finalNumber = " + finalNumber);
   } else {
     input.innerHTML = "Error";
   }
 });
 
 add.addEventListener("click", function() {
+  removeActive();
+  removeOperation();
   add.classList.add("active");
   add.classList.add("operation");
   if (secondNumber != 0) {
@@ -220,6 +244,8 @@ function addFunction() {
 }
 
 multiple.addEventListener("click", function() {
+  removeActive();
+  removeOperation();
   multiple.classList.add("active");
   multiple.classList.add("operation");
   if (secondNumber != 0) {
@@ -239,14 +265,16 @@ function multipleFunction() {
 }
 
 divide.addEventListener("click", function() {
+  removeActive();
+  removeOperation();
   divide.classList.add("active");
   divide.classList.add("operation");
   if (secondNumber != 0) {
     divideFunction();
     number = finalNumber;
     console.log("number = " + number);
-    console.log("finalNumber = " + finalNumber);
     console.log("secondNumber = " + secondNumber);
+    console.log("finalNumber = " + finalNumber);
     secondDigits.length = 0;
     secondNumber = 0;
   }
@@ -258,14 +286,16 @@ function divideFunction() {
 }
 
 subtract.addEventListener("click", function() {
+  removeActive();
+  removeOperation();
   subtract.classList.add("active");
   subtract.classList.add("operation");
   if (secondNumber != 0) {
     subtractFunction();
     number = finalNumber;
     console.log("number = " + number);
-    console.log("finalNumber = " + finalNumber);
     console.log("secondNumber = " + secondNumber);
+    console.log("finalNumber = " + finalNumber);
     secondDigits.length = 0;
     secondNumber = 0;
   }
@@ -276,29 +306,49 @@ function subtractFunction() {
   input.innerHTML = finalNumber;
 }
 
-/*if(digits.length != 0 && secondDigits.length != 0) {
-  addFunction();
-}*/
-
 comma.addEventListener("click", function() {
   commaFunction();
 });
 
 function commaFunction() {
-  if (secondDigits.length != 0) {
-    secondDigits.push(".");
-    secondNumber = secondDigits.join("");
-    input.innerHTML = secondNumber;
+  if (
+    add.classList.contains("operation") ||
+    multiple.classList.contains("operation") ||
+    divide.classList.contains("operation") ||
+    subtract.classList.contains("operation")
+  ) {
+    if (!secondDigits.includes(".")) {
+      if (secondDigits.length == 0) {
+        secondDigits.push(0);
+        secondDigits.push(".");
+        secondNumber = secondDigits.join("");
+        input.innerHTML = secondNumber;
+      } else {
+        secondDigits.push(".");
+        secondNumber = secondDigits.join("");
+        input.innerHTML = secondNumber;
+      }
+    }
   } else {
-    digits.push(".");
-    number = digits.join("");
-    input.innerHTML = number;
+    if (!digits.includes(".")) {
+      if (digits.length == 0) {
+        digits.push(0);
+        digits.push(".");
+        number = digits.join("");
+        input.innerHTML = number;
+      } else {
+        digits.push(".");
+        number = digits.join("");
+        input.innerHTML = number;
+      }
+    }
   }
 }
 
 percentage.addEventListener("click", function() {
   percentageFunction();
-  console.log("number " + number);
+  console.log("number = " + number);
+  console.log("secondNumber = " + secondNumber);
   console.log("finalNumber = " + finalNumber);
   input.innerHTML = finalNumber;
 });
