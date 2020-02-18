@@ -47,7 +47,12 @@ let secondDigits = [];
 let secondNumber = 0;
 
 zero.addEventListener("click", function() {
-  if (add.classList.contains("operation")) {
+  if (
+    add.classList.contains("operation") ||
+    multiple.classList.contains("operation") ||
+    divide.classList.contains("operation") ||
+    subtract.classList.contains("operation")
+  ) {
     if (secondNumber.length == 0) {
       input.innerHTML = secondNumber;
     } else {
@@ -357,6 +362,149 @@ function percentageFunction() {
   number = number / 100;
   finalNumber = number;
 }
+
+document.addEventListener("keyup", function(event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  var key = event.key || event.keyCode;
+  if (key === "0" || key === "0" || key === 48) {
+    numClicked(0);
+  } else if (key === "1" || key === "1" || key === 49) {
+    numClicked(1);
+  } else if (key === "2" || key === "2" || key === 50) {
+    numClicked(2);
+  } else if (key === "3" || key === "3" || key === 51) {
+    numClicked(3);
+  } else if (key === "4" || key === "4" || key === 52) {
+    numClicked(4);
+  } else if (key === "5" || key === "5" || key === 53) {
+    numClicked(5);
+  } else if (key === "6" || key === "6" || key === 54) {
+    numClicked(6);
+  } else if (key === "7" || key === "7" || key === 55) {
+    numClicked(7);
+  } else if (key === "8" || key === "8" || key === 56) {
+    numClicked(8);
+  } else if (key === "9" || key === "9" || key === 57) {
+    numClicked(9);
+  } else if (key === "Backspace" || key === "Backspace" || key === 8) {
+    ac.addEventListener("click", function() {
+      removeOperation();
+      removeActive();
+      clearVars();
+    });
+  } else if (key === "Enter" || key === "Enter" || key === 13) {
+    if (secondDigits.length == 0) {
+      input.innerHTML = number;
+      console.log(number);
+    } else if (add.classList.contains("operation")) {
+      removeOperation();
+      addFunction();
+      number = finalNumber;
+      input.innerHTML = finalNumber;
+      secondDigits.length = 0;
+      secondNumber = 0;
+      console.log("number = " + number);
+      console.log("secondNumber = " + secondNumber);
+      console.log("finalNumber = " + finalNumber);
+    } else if (multiple.classList.contains("operation")) {
+      removeOperation();
+      multipleFunction();
+      number = finalNumber;
+      input.innerHTML = finalNumber;
+      secondDigits.length = 0;
+      secondNumber = 0;
+      console.log("number = " + number);
+      console.log("secondNumber = " + secondNumber);
+      console.log("finalNumber = " + finalNumber);
+    } else if (divide.classList.contains("operation")) {
+      removeOperation();
+      divideFunction();
+      number = finalNumber;
+      input.innerHTML = finalNumber;
+      secondDigits.length = 0;
+      secondNumber = 0;
+      console.log("number = " + number);
+      console.log("secondNumber = " + secondNumber);
+      console.log("finalNumber = " + finalNumber);
+    } else if (subtract.classList.contains("operation")) {
+      removeOperation();
+      subtractFunction();
+      number = finalNumber;
+      input.innerHTML = finalNumber;
+      secondDigits.length = 0;
+      secondNumber = 0;
+      console.log("number = " + number);
+      console.log("secondNumber = " + secondNumber);
+      console.log("finalNumber = " + finalNumber);
+    } else {
+      input.innerHTML = "Error";
+    }
+  } else if (key === "+" || key === "+" || key === "Equal") {
+    removeActive();
+    removeOperation();
+    add.classList.add("active");
+    add.classList.add("operation");
+    if (secondNumber != 0) {
+      addFunction();
+      number = finalNumber;
+      console.log("number = " + number);
+      console.log("secondNumber = " + secondNumber);
+      console.log("finalNumber = " + finalNumber);
+      secondDigits.length = 0;
+      secondNumber = 0;
+    }
+  } else if (key === "/" || key === "/" || key === "Slash") {
+    removeActive();
+    removeOperation();
+    divide.classList.add("active");
+    divide.classList.add("operation");
+    if (secondNumber != 0) {
+      divideFunction();
+      number = finalNumber;
+      console.log("number = " + number);
+      console.log("secondNumber = " + secondNumber);
+      console.log("finalNumber = " + finalNumber);
+      secondDigits.length = 0;
+      secondNumber = 0;
+    }
+  } else if (key === "*" || key === "*" || key === 56) {
+    removeActive();
+    removeOperation();
+    multiple.classList.add("active");
+    multiple.classList.add("operation");
+    if (secondNumber != 0) {
+      multipleFunction();
+      number = finalNumber;
+      console.log("number = " + number);
+      console.log("secondNumber = " + secondNumber);
+      console.log("finalNumber = " + finalNumber);
+      secondDigits.length = 0;
+      secondNumber = 0;
+    }
+  } else if (key === "-" || key === "-" || key === 189) {
+    removeActive();
+    removeOperation();
+    subtract.classList.add("active");
+    subtract.classList.add("operation");
+    if (secondNumber != 0) {
+      subtractFunction();
+      number = finalNumber;
+      console.log("number = " + number);
+      console.log("secondNumber = " + secondNumber);
+      console.log("finalNumber = " + finalNumber);
+      secondDigits.length = 0;
+      secondNumber = 0;
+    }
+  } else if (key === "%" || key === "%" || key === 53) {
+    percentageFunction();
+    console.log("number = " + number);
+    console.log("secondNumber = " + secondNumber);
+    console.log("finalNumber = " + finalNumber);
+    input.innerHTML = finalNumber;
+  }
+});
 
 /* function removeActive() {
   let activeElements = document.getElementsByClassName("active");
