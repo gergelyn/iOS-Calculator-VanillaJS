@@ -227,13 +227,13 @@ result.addEventListener("click", function() {
   }
 });
 
-add.addEventListener("click", function() {
+divide.addEventListener("click", function() {
   removeActive();
   removeOperation();
-  add.classList.add("active");
-  add.classList.add("operation");
+  divide.classList.add("active");
+  divide.classList.add("operation");
   if (secondNumber != 0) {
-    addFunction();
+    divideFunction();
     number = finalNumber;
     console.log("number = " + number);
     console.log("secondNumber = " + secondNumber);
@@ -243,8 +243,8 @@ add.addEventListener("click", function() {
   }
 });
 
-function addFunction() {
-  finalNumber = number + secondNumber;
+function divideFunction() {
+  finalNumber = number / secondNumber;
   input.innerHTML = finalNumber;
 }
 
@@ -269,27 +269,6 @@ function multipleFunction() {
   input.innerHTML = finalNumber;
 }
 
-divide.addEventListener("click", function() {
-  removeActive();
-  removeOperation();
-  divide.classList.add("active");
-  divide.classList.add("operation");
-  if (secondNumber != 0) {
-    divideFunction();
-    number = finalNumber;
-    console.log("number = " + number);
-    console.log("secondNumber = " + secondNumber);
-    console.log("finalNumber = " + finalNumber);
-    secondDigits.length = 0;
-    secondNumber = 0;
-  }
-});
-
-function divideFunction() {
-  finalNumber = number / secondNumber;
-  input.innerHTML = finalNumber;
-}
-
 subtract.addEventListener("click", function() {
   removeActive();
   removeOperation();
@@ -308,6 +287,27 @@ subtract.addEventListener("click", function() {
 
 function subtractFunction() {
   finalNumber = number - secondNumber;
+  input.innerHTML = finalNumber;
+}
+
+add.addEventListener("click", function() {
+  removeActive();
+  removeOperation();
+  add.classList.add("active");
+  add.classList.add("operation");
+  if (secondNumber != 0) {
+    addFunction();
+    number = finalNumber;
+    console.log("number = " + number);
+    console.log("secondNumber = " + secondNumber);
+    console.log("finalNumber = " + finalNumber);
+    secondDigits.length = 0;
+    secondNumber = 0;
+  }
+});
+
+function addFunction() {
+  finalNumber = number + secondNumber;
   input.innerHTML = finalNumber;
 }
 
